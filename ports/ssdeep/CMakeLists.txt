@@ -1,3 +1,24 @@
+# TODO
+#
+#    /* Enable large inode numbers on Mac OS X 10.5.  */
+#    #ifndef _DARWIN_USE_64_BIT_INODE
+#    # define _DARWIN_USE_64_BIT_INODE 1
+#    #endif
+#    
+#    /* Number of bits in a file offset, on hosts where this is settable. */
+#    #undef _FILE_OFFSET_BITS
+#    
+#    /* Define to 1 to make fseeko visible on some hosts (e.g. glibc 2.2). */
+#    #undef _LARGEFILE_SOURCE
+#    
+#    /* Define for large files, on AIX-style hosts. */
+#    #undef _LARGE_FILES
+#    
+# main.h: remove unistd.h
+# replace ftello, fseeko
+#   - There are no functions that returns/use off_t, if you need a 64bit position you can use: _fseeki64 _ftelli64
+#   - Look here fseek, _fseeki64, ftell, and _ftelli64
+
 cmake_minimum_required(VERSION 3.11)
 cmake_policy(VERSION 3.11)
 
@@ -65,8 +86,9 @@ target_include_directories(fuzzy
 #        $<$<CONFIG:RELEASE>:/guard:cf>
 #)
 
+# ssdeep.h ???
 set(PUBLIC_HEADERS
-    ssdeep.h
+    fuzzy.h
 )
 
 if(INSTALL_HEADERS)
